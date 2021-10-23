@@ -152,7 +152,7 @@ def graph(origin, res):
 
 
 if __name__ == '__main__':
-    data_path = 'data\pima.data'
+    data_path = '../data\pima.data'
 
     data = load_data(data_path)
     print(data.shape)

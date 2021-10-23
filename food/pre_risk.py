@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 def loadDataset():
     # Step 1. 加载原始数据
-    food_record = pd.read_csv(r'.\per_month_sale_and_risk.csv', encoding='utf8')
+    food_record = pd.read_csv('../data\per_month_sale_and_risk.csv', encoding='utf8')
     return food_record
 
 

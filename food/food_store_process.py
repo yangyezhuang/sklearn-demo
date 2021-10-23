@@ -5,7 +5,7 @@ from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 
-food_recordfilename = './food_record_ansi.csv'
+food_recordfilename = '../data/food_record_ansi.csv'
 
 daily_risks = {}
 store_risks = {}

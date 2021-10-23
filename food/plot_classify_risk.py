@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report
 # plt.rcParams['font.family'] = 'simhei' 
 # plt.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
 
-food = pd.read_csv(r'.\per_month_sale_and_risk.csv')
+food = pd.read_csv('../data/per_month_sale_and_risk.csv')
 
 # Step 2. 数据预处理
 # Step 2.1 把对属性start_time和place进行编码

@@ -12,7 +12,7 @@ def RiskClassisfication():
     风险预测，依据时间、月售、风险值
     '''
     # Step 1. 加载原始数据
-    food = pd.read_csv(r'.\per_month_sale_and_risk.csv')
+    food = pd.read_csv(r'../data/per_month_sale_and_risk.csv')
 
     # Step 2. 数据预处理
     # Step 2.1 把对属性start_time和place进行编码

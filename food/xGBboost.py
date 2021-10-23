@@ -91,7 +91,7 @@ def walk_forward_validation(data, n_test):
 if (__name__ == "__main__"):
     # load the dataset,数据url:https://raw.githubusercontent.com/jbrownlee/Datasets/master/daily-total-female-births.csv
     # series =read_csv( 'daily-total-female-births.csv', header= 0, index_col= 0) 
-    series = read_csv('per_month_sale_and_risk.csv')
+    series = read_csv('../data/per_month_sale_and_risk.csv')
 
     # 店铺ID
     store_id = "3d8ab846-7725-11ea-98c9-525400c74cae"

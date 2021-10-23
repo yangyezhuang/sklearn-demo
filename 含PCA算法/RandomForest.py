@@ -97,7 +97,7 @@ def graph(origin, res):
 
 
 if __name__ == '__main__':
-    data_path = './data/zhengqi.txt'
+    data_path = '../data/zhengqi.txt'
     data = load_data(data_path)
 
     x_pca = training(data)

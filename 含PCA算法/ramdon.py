@@ -54,7 +54,7 @@ def predict(data, input):
 
 
 if __name__ == '__main__':
-    data_path = './data/zhengqi.txt'
+    data_path = '../data/zhengqi.txt'
     data = load_data(data_path)
     print(data.shape)
 

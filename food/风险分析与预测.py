@@ -30,8 +30,8 @@ def divide_x_y(x, y, cv, n):
 
 
 # load data
-food_store = pd.read_csv(r'.\food_store.csv')
-food_record = pd.read_csv(r'.\food_record.csv')
+food_store = pd.read_csv('../data/food_store.csv')
+food_record = pd.read_csv('../data/food_record.csv')
 # 处理数据，把start_time和place编码
 food = pd.merge(food_record, food_store)
 start_time = pd.get_dummies(food.开始时间)

@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def get_data():
-    data = pd.read_csv('./data/per_month_sale_and_risk.csv')
+    data = pd.read_csv('../data/per_month_sale_and_risk.csv')
     data = data[['开始时间', '风险值', '地区名', '销售额']]
     data['销售额'] = data['销售额'].astype(int)
     # 把地区名转化为数值

@@ -126,7 +126,7 @@ def graph(origin, predict):
 
 
 if __name__ == '__main__':
-    data_path = '.\data\per_month_sale_and_risk.csv'
+    data_path = '../data\per_month_sale_and_risk.csv'
     data = load_data(data_path)
 
     # 训练模型,返回特征值
