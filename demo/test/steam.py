@@ -67,7 +67,6 @@ class Steam(object):
         #     print(score, i)
 
 
-
         rgs_model = RandomForestRegressor(n_estimators=100)
         rgs_model.fit(X_train_std, y_train)
         joblib.dump(rgs_model, '../model/steam.pkl')
