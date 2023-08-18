@@ -1,4 +1,4 @@
-# sklearn-demo
+# scikit-learn demo
 Python机器学习练习案例
 
 ## 案例一
@@ -28,4 +28,5 @@ Python机器学习练习案例
 ```
 
 销售风险预测结果
-![销售风险预测结果](image/sale-risk-predict.png)
+
+![销售风险预测结果](image/sale-risk-predict.png 500x300)
