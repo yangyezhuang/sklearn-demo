@@ -11,11 +11,13 @@ from sklearn.model_selection import train_test_split
 
 
 class Risk(object):
+    """ 商品销售风险预测分析 """
+
     def load_data(self, data_path):
         """
         加载并处理数据
-        :param data_path: 源数据路径
-        :return: 处理好的数据
+        :param data_path 源数据路径
+        :return: data 处理好的数据
         """
         data = pd.read_csv(data_path)
         data = data[['开始时间', '风险值', '地区名', '销售额']]
@@ -23,8 +25,8 @@ class Risk(object):
         data['销售额'] = data['销售额'].astype(np.int32)
         data = pd.get_dummies(data, columns=['地区名'])
         # boxplot
-        # plt.boxplot(data['销售额'])
-        # plt.show()
+        plt.boxplot(data['销售额'])
+        plt.show()
         return data
 
     def training(self, data):
@@ -36,6 +38,7 @@ class Risk(object):
         y = data['风险值']
         x = data.drop('风险值', axis=1)
 
+        # 划分训练集和测试集
         X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
         std = StandardScaler()
         std.fit(X_train)
@@ -84,8 +87,13 @@ class Risk(object):
 
         return model.predict(input_std)
 
-    # 聚类
+    #
     def save_type(self, df):
+        """
+        聚类
+        :param df:
+        :return:
+        """
         kmeans = KMeans(3, init='k-means++')
         kmeans.fit(df)
         # print('kmeansPredicter labels:', np.unique(kmeansPredicter.labels_))
@@ -93,29 +101,35 @@ class Risk(object):
         sort_res = df_res.sort_values(by=0)
         sort_res.T.to_csv('../type/risk_type.csv', header=None, index=None, mode='w')
 
-    # 映射标签
+
     def get_map(self, num):
+        """
+        映射标签
+        :param num:
+        :return:
+        """
         arr = pd.read_csv('../type/risk_type.csv', nrows=1, header=None)
         arr = arr.values[0]
         if num <= arr[0]:
             return {'risk': num, 'label': 'low'}
-        elif num > arr[0] and num <= arr[1]:
+        elif arr[0] < num <= arr[1]:
             return {'risk': num, 'label': 'normal'}
         elif num > arr[1]:
             return {'risk': num, 'label': 'high'}
 
-    # 绘图
+
     def graph(self, origin, predict):
         """
-        绘图
+        生成预测图
         :param origin: 原始数据
         :param predict: 预测结果
         :return:
         """
         plt.rcParams['font.family'] = 'simhei'
+        plt.title("销售风险预测")
         plt.plot(origin, label='原始')
         plt.plot(predict, label='预测')
-        plt.ylabel('risk')
+        plt.ylabel('风险值')
         plt.legend()
         plt.show()
 

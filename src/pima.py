@@ -11,7 +11,14 @@ from sklearn.model_selection import train_test_split, cross_val_score
 
 
 class Pima(object):
+    """ 患病率数据预测分析 """
+
     def load_data(self, data_path):
+        """
+        加载并处理数据
+        :param data_path: 数据源路径
+        :return data: 处理好的数据
+        """
         data = pd.read_csv(data_path, header=None)
         data[1] = data[1].map(lambda x: np.nan if str(x) == 'None' else x)
         data.dropna(subset=[1], inplace=True)
@@ -31,7 +38,7 @@ class Pima(object):
         # PCA降维
         pca = PCA(n_components=7)
         x_pca = pca.fit_transform(x)
-
+        # 划分训练集和测试集
         X_train, X_test, y_train, y_test = train_test_split(x_pca, y, test_size=0.2)
         std = StandardScaler()
         std.fit(X_train)
@@ -96,13 +103,26 @@ class Pima(object):
         return x_pca
 
     def predict(self, data, input):
+        """
+        使用模型进行预测
+        :param data:
+        :param input:
+        :return:
+        """
         std = StandardScaler()
         std.fit(data)
         input_std = std.transform(input)
         model = joblib.load('../model/pima.pkl')
         return model.predict(input_std)
 
+
     def graph(self, origin, predict):
+        """
+        对预测结果进行绘图
+        :param origin:
+        :param predict:
+        :return:
+        """
         plt.rcParams['font.family'] = 'simhei'
         plt.rcParams['axes.unicode_minus'] = False
         plt.plot(origin, 'o-', label='原始')
@@ -116,11 +136,8 @@ if __name__ == '__main__':
     p = Pima()
     data = p.load_data(data_path)
     # print(data)
-
     x_pca = p.training(data)
-
     res = p.predict(x_pca, x_pca[:10])
     print('预测结果：', res)
-
     origin = list(data[8])[:10]
     p.graph(origin, res)

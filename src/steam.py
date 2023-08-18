@@ -10,13 +10,14 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
 
-
 class Steam(object):
+    """ 工业蒸汽数据案例分析 """
+
     def load_data(self, data_path):
         """
         加载并处理数据
         :param data_path: 数据源路径
-        :return: 处理好的数据
+        :return data: 处理好的数据
         """
         data = pd.read_csv(data_path, sep='\s+')
         data['V37'].fillna(data['V37'].mean().round(3), inplace=True)
@@ -34,10 +35,9 @@ class Steam(object):
         :param data: 处理好的数据
         :return: x_pca
         """
-
         # 查看相关性
         corr = data.corr()['target'].abs().sort_values()
-        # print(corr)
+        print(corr)
 
         y = data['target']
         x = data.drop('target', axis=1)
@@ -46,13 +46,14 @@ class Steam(object):
         pca = PCA(n_components=28)
         x_pca = pca.fit_transform(x)
 
+        # 划分训练集和测试集
         X_train, X_test, y_train, y_test = train_test_split(x_pca, y, test_size=0.2)
         std = StandardScaler()
         std.fit(X_train)
         X_train_std = std.transform(X_train)
         X_test_std = std.transform(X_test)
 
-        # =============随机森林===========
+        # ========= =随机森林===========
         # for i in [1, 10, 100]:
         #     rgs_model = RandomForestRegressor(n_estimators=i)
         #     rgs_model.fit(X_train_std, y_train)
@@ -65,8 +66,6 @@ class Steam(object):
         #     knn_model.fit(X_train_std, y_train)
         #     score = knn_model.score(X_test_std, y_test)
         #     print(score, i)
-
-
 
         rgs_model = RandomForestRegressor(n_estimators=100)
         rgs_model.fit(X_train_std, y_train)
@@ -82,9 +81,10 @@ class Steam(object):
 
         return x_pca
 
+
     def predict(self, data, input):
         """
-        加载 model进行预测
+        使用模型进行预测
         :param data: x_pca
         :param input: x_pca[:10]
         :return: 预测结果
@@ -95,9 +95,10 @@ class Steam(object):
         model = joblib.load('../model/steam.pkl')
         return model.predict(input_std)
 
+
     def graph(self, origin, predict):
         """
-        绘图
+        对预测结果进行绘图
         :param origin: 原始数据
         :param predict: 预测结果
         :return:
@@ -117,12 +118,9 @@ if __name__ == '__main__':
     data_path = '../data/zhengqi.txt'
     data = s.load_data(data_path)
     # print(data.isnull().sum())
-
     x_pca = s.training(data)
     # print(x_pca)
-
     res = s.predict(x_pca, x_pca[:10])
     print('预测结果：', res)
-
     origin = list(data['target'])[:10]
     s.graph(origin, res)
