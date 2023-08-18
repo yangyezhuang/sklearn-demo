@@ -29,4 +29,4 @@ Python机器学习练习案例
 
 销售风险预测结果
 
-![销售风险预测结果](image/sale-risk-predict.png 500x300)
+![销售风险预测结果](image/sale-risk-predict.png)
